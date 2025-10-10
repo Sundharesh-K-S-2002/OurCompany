@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Add-Products</title>
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .bg_colour {
+            background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: fixed;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .card_style {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.301);
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 20px 25px 70px rgba(0, 0, 0, 0.2);
+            width: 500px;
+            color: rgb(24, 20, 20);
+        }
+
+        #prod_text {
+            color: rgb(53, 55, 53);
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg_colour"></div>
+    <div class="card_style">
+        <h1 class="text-center mb-4" id="prod_text">Add Products</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Product Image</label>
+                <div class="col-sm-8">
+                    {{ product.productimage }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Product Name</label>
+                <div class="col-sm-8">
+                    {{ product.productname }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Product Code</label>
+                <div class="col-sm-8">
+                    {{ product.productcode }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Price</label>
+                <div class="col-sm-8">
+                    {{ product.price }}
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Quantity</label>
+                <div class="col-sm-8">
+                    {{ product.quantity }}
+                </div>
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Add" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  .text {
+    color: rgb(55, 57, 55);
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+  }
+</style>
+
+<div class="container mt-5 col-md-5">
+
+  <form class="col-12 mx-auto card p-4 shadow-lg" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3 class="text text-center">🧾-UPDATE RECEIPT-🧾</h3>
+    <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">Update-Data</h4>
+
+    <div class="form-group mt-3">
+      <label for="itemName">Item Name</label>
+      <input type="text" name="name" value="{{ receipt.name }}" class="form-control" id="itemName" required>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="itemPrice">Price</label>
+      <input type="number" name="price" value="{{ receipt.price }}" class="form-control" id="itemPrice" required>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="itemQuantity">Quantity</label>
+      <input type="number" name="quantity" value="{{ receipt.quantity }}" class="form-control" id="itemQuantity" required>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-danger">Update Data</button>
+    </div>
+  </form>
+
+</div>
+
+{% endblock %}

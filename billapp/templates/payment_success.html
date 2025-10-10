@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6ffed;
+            text-align: center;
+            padding-top: 100px;
+        }
+        h1 {
+            color: #28a745;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #28a745;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>✅ Payment Successful!</h1>
+    <p>Thank you for your purchase. Your payment has been received.</p>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

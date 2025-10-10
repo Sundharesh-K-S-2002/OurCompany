@@ -1,0 +1,107 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .bg-image {
+            background-image: url("{% static 'images/ironman.jpg' %}");
+            background-color: rgba(97, 100, 157, 0.944);
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: fixed;
+            width: 100%;
+            z-index: -1;
+        }
+
+
+        .card-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(202, 198, 198, 0.445);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            color: rgb(24, 20, 20);
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-image"></div>
+
+    <div class="card-center">
+        <h3 class="text-center mb-4">Register Page</h3>
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">username</label>
+                <div class="col-sm-8">
+                    {{ form.username }}
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">password</label>
+                <div class="col-sm-8">
+                    {{ form.password }}
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">email</label>
+                <div class="col-sm-8">
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">number</label>
+                <div class="col-sm-8">
+                    {{ form.number }}
+                </div>
+            </div>
+
+            <div class="text-center">
+                <input type="submit" value="Register Now" class="btn btn-primary">
+            </div>
+        </form>
+        <p class="text-center" style="color: #555;">
+            <a href="{% url 'login' %}" style="color: #007bff;"><button class="btn btn-outline-dark mt-4" >Sign Up</button></a>
+        </p>
+    </div>
+
+</body>
+
+</html>

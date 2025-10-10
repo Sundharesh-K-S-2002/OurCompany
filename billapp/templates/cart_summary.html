@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            padding: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        .btns {
+            margin-left: 300px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h2>Cart Summary</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in cart %}
+    <tr>
+      <td>{{ item.product.productname }}</td>
+      <td>${{ item.product.price }}</td>
+      <td>{{ item.count }}</td>
+      <td>${{ item.subtotal }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h3>Total: ${{ total_price }}</h3>
+    <form method="post" action="{% url 'calculate_total' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Clear All</button>
+    </form>
+    <a href="{% url 'order' %}" class="btn btn-secondary mt-3"><button>Go To Payment</button></a>
+</div> -->
+    <!-- <h2>Cart Summary</h2>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td><img src="{{ item.product.productimage.url }}" alt="{{ item.product.productname }}" width="100" height="100"></td>
+                    <td>{{ item.product.productname }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>${{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Total: ${{ total_price }}</h3>   
+         <form method="post" action="{% url 'calculate_total' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Clear All</button>
+    </form>
+    <a href="{% url 'payment' %}" class="btn btn-secondary mt-3"><button>Go To Payment</button></a>  
+    </div> -->
+
+    <h2 style="margin-left:43%; color: rgba(2, 183, 255, 0.758); font-size: 35px; ">Product Details</h2>
+    <div class="container">
+        <table border="2px" class="table" style="margin-left:31%; border:none">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td><img src="{{ item.product.productimage.url }}" alt="{{ item.product.productname }}" width="100"
+                            height="100"></td>
+                    <td>{{ item.product.productname }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>${{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3 style="display: flex; justify-content: center;">Total: ₹{{ total_price }}</h3>
+
+
+
+        <div class="buttons">
+            <a href="{% url 'order' %}"><button>Add Itmes</button></a>
+            {% comment %} <a href="{% url 'payment' %}" id="pay-btn" class="btn btn-primary"><button>Go To Payment</button></a> {% endcomment %}
+            <button id="pay-btn" class="btn btn-primary">Go To Payment</button>
+        </div>
+
+        <form method="post" action="{% url 'calculate_total' %}" id="btns"
+            style="display: flex; justify-content:center; margin-top:30px">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Clear All</button>
+        </form>
+    </div>
+  {% comment %} <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  document.getElementById('pay-btn').onclick = function () {
+    const amountInPaise = parseFloat("{{ total_price }}");
+
+    fetch('/create-order/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: JSON.stringify({ amount: amountInPaise })
+    })
+    .then(response => response.json())
+    .then(order => {
+      const options = {
+        "key": "{{ RAZORPAY_KEY_ID }}",
+        "amount": order.amount, // Convert to paise
+        "currency": "INR",
+        "name": "My Store",
+        "description": "Cart Checkout",
+        "order_id": order.id,
+        "handler": function (response) {
+          fetch('/razorpay/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify(response)
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === 'success') {
+              window.location.href = '/success/';
+            } else {
+              window.location.href = '/error/';
+            }
+          });
+        }
+      };
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+  };
+</script> {% endcomment %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  document.getElementById('pay-btn').onclick = function (e) {
+    e.preventDefault();
+    const amountInRupees = parseFloat("{{ total_price }}");
+    const amountInPaise = Math.round(amountInRupees * 100);
+
+    fetch('/create-order/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: JSON.stringify({ amount: amountInRupees })
+    })
+    .then(response => response.json())
+    .then(order => {
+      const options = {
+        "key": "{{ RAZORPAY_KEY_ID }}",
+        "amount": order.amount,
+        "currency": "INR",
+        "name": "Our Company",
+        "description": "Cart Checkout",
+        "order_id": order.id,
+        "handler": function (response) {
+          fetch('/razorpay/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify(response)
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === 'success') {
+              window.location.href = '/success/';
+            } else {
+              window.location.href = '/error/';
+            }
+          });
+        }
+      };
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+  };
+</script>
+</body>
+
+</html>
