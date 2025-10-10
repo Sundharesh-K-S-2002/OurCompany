@@ -16,7 +16,7 @@ def register_page(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('index')
 
     return render(request, 'register.html', data)
 
@@ -29,8 +29,8 @@ def login(request):
             if user:
                 return redirect('home')
         except reg.DoesNotExist:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
-    return render(request, 'login.html')
+            return render(request, 'index.html', {'error': 'Invalid credentials'})
+    return render(request, 'index.html')
 
 def home(request):
     return render(request, 'home.html')
