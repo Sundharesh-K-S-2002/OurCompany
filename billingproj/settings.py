@@ -100,6 +100,9 @@ DATABASES = {
 
 INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Media files (user uploaded or demo images)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
