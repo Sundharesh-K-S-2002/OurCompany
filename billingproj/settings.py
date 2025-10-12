@@ -100,12 +100,8 @@ DATABASES = {
 
 INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Media files (user uploaded or demo images)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 RAZORPAY_KEY_ID = "rzp_test_uVn1nCMdkKJ7qH"
