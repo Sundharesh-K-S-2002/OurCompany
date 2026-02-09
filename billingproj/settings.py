@@ -87,16 +87,24 @@ WSGI_APPLICATION = 'billingproj.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'customers_xby7',  # your Render database name
+#         'USER': 'customers_xby7_user',
+#         'PASSWORD': 'DKDK1VvWvVecIHT9YVtCpY8YbLV5Mwot',
+#         'HOST': 'dpg-d3kagtm3jp1c73b2513g-a.oregon-postgres.render.com',  # FULL host here
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'customers_xby7',  # your Render database name
-        'USER': 'customers_xby7_user',
-        'PASSWORD': 'DKDK1VvWvVecIHT9YVtCpY8YbLV5Mwot',
-        'HOST': 'dpg-d3kagtm3jp1c73b2513g-a.oregon-postgres.render.com',  # FULL host here
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
+
 
 INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
 
